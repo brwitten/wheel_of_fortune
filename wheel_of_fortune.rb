@@ -1,18 +1,28 @@
 class WheelOfFortune
-  def initialize
+  attr_accessor :phrase, :remaining_letters, :guesses
+
+  def initialize(inputs)
+    @theme = inputs[:theme.freeze] || ""
+    @phrase = inputs[:phrase] || ""
+    @remaining_letters = []
+    @guesses = []
     p "Happy coding!"
   end
 
   def to_s
-    nil
+    phrase
   end
 
   def can_i_have?(input)
-    nil
+    guess = input.downcase
   end
 
   def game_over?
-    nil
+    if remaining_letters.length > 0 && guesses.length > 0
+      true
+    else
+      false
+    end
   end
 end
 
