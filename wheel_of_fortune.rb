@@ -13,13 +13,14 @@ class WheelOfFortune
     @phrase
   end
 
-  def theme
-    @theme
-  end
-
   def can_i_have?(input)
     guess = input.downcase
+    lower_phrase = @phrase.downcase
     @guesses << guess
+    puts "CLEANED PHRASE: #{cleaned_phrase}"
+    if clean_phrase.include? (guess)
+      puts guess
+    end
   end
 
   def game_over?
@@ -30,6 +31,19 @@ class WheelOfFortune
     end
   end
 
+  #need getter so that it is read only
+  def theme
+    @theme
+  end
+
+  # cleaning the phrase to distinct letters, no spaces
+  def clean_phrase
+    clean_phrase = @phrase.to_s
+    clean_phrase.downcase!
+    clean_phrase.squeeze!
+    clean_phrase.gsub!(/[[:space:]]/, '')
+    clean_phrase = clean_phrase.split(//)
+  end
 
 end
 
@@ -43,8 +57,7 @@ if __FILE__ == $0
   j.can_i_have?("g")
   j.can_i_have?("o")
   p j
-  puts j.phrase
-  puts j.theme
+  # puts j.guess
 
   puts j # calls j.to_s
 
