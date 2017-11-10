@@ -17,9 +17,11 @@ class WheelOfFortune
     guess = input.downcase
     lower_phrase = @phrase.downcase
     @guesses << guess
-    puts "CLEANED PHRASE: #{cleaned_phrase}"
+    puts "CLEANED PHRASE: #{clean_phrase}"
     if clean_phrase.include? (guess)
-      puts guess
+      puts "Great guess!"
+    else
+      puts "Try again.."
     end
   end
 
