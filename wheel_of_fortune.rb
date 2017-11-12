@@ -11,8 +11,15 @@ class WheelOfFortune
   #displays blocks
   def to_s
     return @phrase if game_over?
-    @phrase.each { |x| @remaining_letters.include? phrase.gsub(x,"-") }
-    # @phrase.gsub(remaining_letters, "_")
+    display = ""
+    phrase.each_char {|x|
+      if @remaining_letters.include?(x.downcase)
+        display = display+"_"
+      else
+        display = display+x
+      end
+    }
+    return display
   end
 
   #handles guess
@@ -23,7 +30,6 @@ class WheelOfFortune
       puts "you already guessed this!"
     else
       @guesses << guess
-      # puts "CLEAN PHRASE: #{clean_phrase}"
       if clean_phrase.include? (guess)
         puts "Great guess!"
         @remaining_letters.delete(guess)
@@ -49,13 +55,9 @@ class WheelOfFortune
     @theme
   end
 
-  def original_phrase(phrase)
-    @original_phrase = @phrase
-  end
-
   # cleaning the phrase to distinct letters;
   def clean_phrase
-    clean_phrase = @phrase.to_s
+    clean_phrase = @phrase.dup
     clean_phrase.downcase!
     clean_phrase.squeeze!
     clean_phrase.gsub!(/[[:space:]]/, '')
@@ -72,10 +74,14 @@ if __FILE__ == $0
 
   # DRIVER CODE
   j = WheelOfFortune.new( {theme: "card games", phrase: "Go fish"} )
-  j.can_i_have?("g")
-  j.can_i_have?("g")
-  j.can_i_have?("o")
-  j.can_i_have?("e")
   p j
+  p j.to_s
+  j.can_i_have?("g")
+  p j
+  p j.to_s
+  # j.can_i_have?("g")
+  # j.can_i_have?("o")
+  # p j
+  # j.can_i_have?("e")
 
 end
