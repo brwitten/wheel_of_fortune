@@ -67,18 +67,17 @@ class WheelOfFortune
 end
 
 
-
 # Checks to see if we executed this file from the command-line
 # e.g. `ruby simple_jepordy.rb`
 if __FILE__ == $0
 
   # DRIVER CODE
   j = WheelOfFortune.new( {theme: "card games", phrase: "Go fish"} )
-  p j
-  p j.to_s
-  j.can_i_have?("g")
-  p j
-  p j.to_s
+  # p j
+  # p j.to_s
+  # j.can_i_have?("g")
+  # p j
+  # p j.to_s
   # j.can_i_have?("g")
   # j.can_i_have?("o")
   # p j
