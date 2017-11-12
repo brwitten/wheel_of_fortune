@@ -10,8 +10,9 @@ class WheelOfFortune
 
   #displays blocks
   def to_s
-    @phrase
-    @phrase.gsub(remaining_letters, "_")
+    return @phrase if game_over?
+    @phrase.each { |x| @remaining_letters.include? phrase.gsub(x,"-") }
+    # @phrase.gsub(remaining_letters, "_")
   end
 
   #handles guess
@@ -22,7 +23,7 @@ class WheelOfFortune
       puts "you already guessed this!"
     else
       @guesses << guess
-      puts "CLEAN PHRASE: #{clean_phrase}"
+      # puts "CLEAN PHRASE: #{clean_phrase}"
       if clean_phrase.include? (guess)
         puts "Great guess!"
         @remaining_letters.delete(guess)
@@ -35,7 +36,6 @@ class WheelOfFortune
     end
   end
 
-  #is the game over?
   def game_over?
     if @remaining_letters.length == 0 && guesses.length > 0
       true
@@ -47,6 +47,10 @@ class WheelOfFortune
   #need getter so that it is read only
   def theme
     @theme
+  end
+
+  def original_phrase(phrase)
+    @original_phrase = @phrase
   end
 
   # cleaning the phrase to distinct letters;
@@ -71,6 +75,7 @@ if __FILE__ == $0
   j.can_i_have?("g")
   j.can_i_have?("g")
   j.can_i_have?("o")
+  j.can_i_have?("e")
   p j
 
 end
